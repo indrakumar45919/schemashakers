@@ -1,0 +1,44 @@
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden; /* Add standard property */
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  opacity: 1;
+}
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  border: 0;
+  width: 100%;
+  max-width: 100%; /* Ensure responsive behavior */
+  object-fit: cover; /* Better image scaling */
+  transition: transform 0.3s ease;
+}
+
+.rslides img:hover {
+  transform: scale(1.02); /* Subtle zoom effect on hover */
+}

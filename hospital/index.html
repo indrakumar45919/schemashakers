@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --background-color: #f5f7fa;
+            --text-color: #2c3e50;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        /* Update the navbar styles in the existing <style> section */
+        /* Update the navbar styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Update the scroll effect in the JavaScript */
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links li.active a {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links li.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Add responsive menu button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+        
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1rem 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        }
+        /* Hero Section */
+        .hero {
+            margin : 5rem 0rem;
+            padding: 120px 0 4rem;
+            text-align: center;
+            background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: var(--white);
+            
+
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+           
+            margin: 20px auto;
+        }
+
+        /* Cards Section */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Forms */
+        .form-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 2rem auto;
+            background-color: var(--white);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e2a3a;
+            color: #fff;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #3498db;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: #3498db;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-links svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        .content-grids {
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 2rem;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.review-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3),
+                0 0 30px rgba(52, 152, 219, 0.2),
+                0 0 50px rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(52, 152, 219, 0.4),
+                0 0 40px rgba(52, 152, 219, 0.3),
+                0 0 60px rgba(52, 152, 219, 0.2);
+}
+
+.review-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.star {
+    width: 24px;
+    height: 24px;
+}
+
+.review-text {
+    color: #2c3e50;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.reviewer-name {
+    color: #7f8c8d;
+    font-style: italic;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.blogs-section {
+    padding: 4rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blogs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3),
+                0 0 30px rgba(52, 152, 219, 0.2),
+                0 0 50px rgba(52, 152, 219, 0.1);
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(52, 152, 219, 0.4),
+                0 0 40px rgba(52, 152, 219, 0.3),
+                0 0 60px rgba(52, 152, 219, 0.2);
+}
+
+.blog-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-content h3 {
+    color: #2c3e50;
+    font-size: 1.3em;
+    margin-bottom: 1rem;
+}
+
+.blog-content p {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.read-more {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover {
+    background: #2980b9;
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .blogs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+    /* Chatbot Styles */
+    .chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .chat-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #3498db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease;
+        align-self: flex-end;
+    }
+
+    .chat-button:hover {
+        transform: scale(1.1);
+    }
+
+    .chat-container {
+        display: none;
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .chat-header {
+        background: #3498db;
+        color: white;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .chat-messages {
+        height: 300px;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        max-width: 80%;
+        padding: 8px 12px;
+        border-radius: 15px;
+    }
+
+    .user-message {
+        background: #e8f5fe;
+        margin-left: auto;
+        border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+        background: #f0f2f5;
+        margin-right: auto;
+        border-bottom-left-radius: 5px;
+    }
+
+    .chat-input {
+        display: flex;
+        padding: 10px;
+        background: #f8f9fa;
+        border-top: 1px solid #eee;
+    }
+
+    .chat-input input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        margin-right: 8px;
+        outline: none;
+    }
+
+    .chat-input button {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .chat-input button:hover {
+        background: #2980b9;
+    }
+    </style>
+</head>
+<body>
+    
+
+
+
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo"><span style="font-size: 30px;">🏥</span> Hospital MedCorps 104
+            </a>
+            <button class="menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <ul class="nav-links">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Our Hospital Management System</h1>
+<p>Effortlessly manage appointments, patients, and records — all in one place.</p>
+
+        </div>
+    </section>
+
+    <main class="container">
+        
+
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-icon">
+                    👤
+                </div>
+                <div class="login-content">
+                    <h3>Patients Login</h3>
+                    <p>Register & Book Appointment</p>
+                    <a href="hms/user-login.php" class="login-button">Click Here</a>
+                </div>
+            </div>
+        
+            <div class="login-card">
+                <div class="login-icon">
+                    👨‍⚕️
+                </div>
+                <div class="login-content">
+                    <h3>Doctors Login</h3>
+                    <p>Manage Appointments & Patients</p>
+                    <a href="hms/doctor/" class="login-button">Click Here</a>
+                </div>
+            </div>
+        
+            <div class="login-card">
+                <div class="login-icon">
+                    👨‍💼
+                </div>
+                <div class="login-content">
+                    <h3>Admin Login</h3>
+                    <p>Control & Manage System</p>
+                    <a href="hms/admin" class="login-button">Click Here</a>
+                </div>
+            </div>
+        </div>
+
+
+
+<div class="card " id="website-info-card" style="box-shadow: none;">
+    <div class="loader enhanced-loader">
+        <p class="loader-text">Our website contains</p>
+        <div class="words enhanced-words">
+            <span class="word enhanced-word" style="color: #3498db;">Doctors</span>
+            <span class="word enhanced-word" style="color: #3498db;">Patient Records</span>
+            <span class="word enhanced-word" style="color: #3498db;">Appointments</span>
+            <span class="word enhanced-word" style="color: #3498db;">Emergency Care</span>
+            <span class="word enhanced-word" style="color: #3498db;">Pharmacy Support</span>
+        </div>
+    </div>
+</div>
+
+<div class="content-grids">
+    <div class="reviews-section">
+        <h2 class="section-title">Patient Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+                <p class="review-text">"Excellent care and professional staff. The doctors are very attentive and the facilities are modern."</p>
+                <p class="reviewer-name">- Eren Yeager</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+                <p class="review-text">
+                    "Outstanding hospital with state-of-the-art equipment. The staff is friendly and caring."
+                  </p>
+                  <p class="reviewer-name">- Mikasa Ackerman</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <svg class="star" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="#FFD700" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                </div>
+                <p class="review-text">
+                    "Great experience! The doctors explained everything clearly and made me feel comfortable."
+                  </p>
+                  <p class="reviewer-name">- Levi Ackerman</p>
+            </div>
+            <!-- Repeat for other review cards -->
+        </div>
+    </div>
+
+    <div class="blogs-section">
+        <h2 class="section-title">Latest Health Blogs</h2>
+        <div class="blogs-grid">
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="images/hi.jpg" alt="Health Tips">
+                </div>
+                <div class="blog-content">
+                    <h3>Tips for a Healthy Lifestyle</h3>
+                    <p>Learn about the essential habits that can help you maintain good health and wellness...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="images/7317107.jpg" alt="Medical Advances">
+                </div>
+                <div class="blog-content">
+                    <h3>Latest Medical Technologies</h3>
+                    <p>Discover the cutting-edge technologies that are revolutionizing healthcare...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="images/Medical Staff Health Icons.avif" alt="Nutrition Guide">
+                </div>
+                <div class="blog-content">
+                    <h3>Nutrition and Diet Tips</h3>
+                    <p>Expert advice on maintaining a balanced diet and proper nutrition for optimal health...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+        
+    </main>
+
+
+<footer class="footer-container">
+    <div class="footer-wrapper">
+        <div class="footer-section">
+            <h2>Quick Links</h2>
+            <ul class="footer-links">
+                <li><a href="index.html">
+                    🏠 Home</a>
+                </li>
+                <li><a href="contact.php">
+                    📞 Contact</a>
+                </li>
+                <li><a href="about.html">
+                    ℹ️ About Us</a>
+                </li>
+                <li><a href="services.html">
+                    ⚙️ Services</a>
+                </li>
+                <li><a href="appointments.php">
+                    📅 Book Appointment</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h2>Our Services</h2>
+            <ul class="footer-links">
+                <li><a href="#">
+                    🚑 Emergency Care</a>
+                </li>
+                <li><a href="#">
+                    👨‍⚕️ Outpatient Services</a>
+                </li>
+                <li><a href="#">
+                    🔬 Laboratory Services</a>
+                </li>
+                <li><a href="#">
+                    💊 Pharmacy</a>
+                </li>
+                <li><a href="#">
+                    🏃 Rehabilitation</a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h2>Contact Info</h2>
+            <ul class="contact-info">
+                <li>
+                    📍 123 Hospital Street, City
+                </li>
+                <li>
+                    📱 +1 234 567 8900
+                </li>
+                <li>
+                    📧 info@hospital.com
+                </li>
+                <li>
+                    ⏰ 24/7 Emergency Services
+                </li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h2>Follow Us</h2>
+            <ul class="social-links">
+                <li><a href="#">
+                    📘 Facebook</a>
+                </li>
+                <li><a href="#">
+                    🐦 Twitter</a>
+                </li>
+                <li><a href="#">
+                    📸 Instagram</a>
+                </li>
+                <li><a href="#">
+                    💼 LinkedIn</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Created By <a href="#">The Boys</a> | All Rights Reserved</p>
+    </div>
+</footer>
+
+<!-- Chatbot Widget -->
+<div class="chat-widget">
+    <div class="chat-container">
+        <div class="chat-header">
+            <span>Chat with us</span>
+            <span class="close-chat" style="cursor: pointer;">✕</span>
+        </div>
+        <div class="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type your message..." />
+            <button>Send</button>
+        </div>
+    </div>
+    <div class="chat-button">💬</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const chatWidget = document.querySelector('.chat-widget');
+    const chatButton = chatWidget.querySelector('.chat-button');
+    const chatContainer = chatWidget.querySelector('.chat-container');
+    const closeChat = chatWidget.querySelector('.close-chat');
+    const messageInput = chatWidget.querySelector('input');
+    const sendButton = chatWidget.querySelector('button');
+    const messagesContainer = chatWidget.querySelector('.chat-messages');
+
+    // Load chat history from localStorage
+    const chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    chatHistory.forEach(message => {
+        const messageElement = createMessageElement(message.text, message.type);
+        messagesContainer.appendChild(messageElement);
+    });
+
+    // Toggle chat container
+    chatButton.addEventListener('click', () => {
+        chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+        if (chatContainer.style.display === 'block') {
+            messageInput.focus();
+        }
+    });
+
+    closeChat.addEventListener('click', () => {
+        chatContainer.style.display = 'none';
+    });
+
+    // Send message function
+    const sendMessage = () => {
+        const message = messageInput.value.trim();
+        if (message) {
+            // Add user message
+            const userMessage = createMessageElement(message, 'user');
+            messagesContainer.appendChild(userMessage);
+            chatHistory.push({ text: message, type: 'user' });
+
+            // Generate bot response
+            const botResponse = generateResponse(message);
+            setTimeout(() => {
+                const botMessage = createMessageElement(botResponse, 'bot');
+                messagesContainer.appendChild(botMessage);
+                chatHistory.push({ text: botResponse, type: 'bot' });
+                
+                // Save to localStorage
+                localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+                
+                // Scroll to bottom
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 500);
+
+            messageInput.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    };
+
+    // Create message element
+    function createMessageElement(text, type) {
+        const div = document.createElement('div');
+        div.classList.add('message', `${type}-message`);
+        div.textContent = text;
+        return div;
+    }
+
+    // Generate bot response
+    function generateResponse(message) {
+        const responses = {
+            'hello': 'Hi! How can I help you today?',
+            'hi': 'Hello! How may I assist you?',
+            'appointment': 'You can book an appointment by logging into your account and selecting the "Book Appointment" option.',
+            'doctor': 'We have various specialist doctors available. Please login to view their schedules and specialties.',
+            'emergency': 'For emergencies, please call our 24/7 emergency hotline or visit our emergency department immediately.',
+            'contact': 'You can reach us through our contact page or call our main line for assistance.',
+            'location': 'We are located at Medical Center Drive. You can find directions on our contact page.',
+            'hours': 'Our regular hours are 9 AM to 6 PM, Monday through Saturday. Emergency services are available 24/7.',
+            'insurance': 'We accept most major insurance providers. Please contact our billing department for specific inquiries.',
+            'covid': 'We follow strict COVID-19 protocols. Please wear a mask and maintain social distancing when visiting.',
+        };
+
+        const messageLower = message.toLowerCase();
+        for (let key in responses) {
+            if (messageLower.includes(key)) {
+                return responses[key];
+            }
+        }
+        return "I'm here to help! Please ask about appointments, doctors, emergency services, or general information.";
+    }
+
+    // Event listeners
+    sendButton.addEventListener('click', sendMessage);
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+});
+</script>
+
+<style>
+    .login-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.login-card {
+    background: white;
+    border-radius: 10px;
+    margin-top: 6px;
+    padding: 20px;
+    width: 310px;
+    height: 280px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(52, 152, 219, 0.3),
+                0 0 30px rgba(52, 152, 219, 0.2),
+                0 0 50px rgba(52, 152, 219, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(52, 152, 219, 0.4),
+                0 0 40px rgba(52, 152, 219, 0.3),
+                0 0 60px rgba(52, 152, 219, 0.2);
+}
+
+.login-icon {
+    margin-bottom: 12px;
+    font-size: 52px;
+}
+
+.login-content h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.login-content p {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.login-button:hover {
+    background: #2980b9;
+}
+
+#website-info-card {
+    margin: 2rem auto; /* Add margin to center the card */
+    text-align: center; /* Center the text within the card */
+    max-width: 600px; /* Limit the width of the card if needed */
+}
+
+.enhanced-card {
+    --bg-color: #FFFFFF;
+    background-color: var(--bg-color);
+    padding: 1rem 2rem;
+    border-radius: 1.25rem;
+}
+
+.enhanced-loader {
+    color: rgb(124, 124, 124);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 40px;
+    padding: 10px 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 8px;
+}
+
+.enhanced-words {
+    overflow: hidden;
+    position: relative;
+}
+
+.enhanced-words::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        var(--bg-color) 10%,
+        transparent 30%,
+        transparent 70%,
+        var(--bg-color) 90%
+    );
+    z-index: 20;
+}
+
+.enhanced-word {
+    display: block;
+    height: 100%;
+    padding-left: 6px;
+    color: #956afa;
+    animation: spin_4991 4s infinite;
+}
+
+@keyframes spin_4991 {
+    10% {
+        -webkit-transform: translateY(-102%);
+        transform: translateY(-102%);
+    }
+
+    25% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+    35% {
+        -webkit-transform: translateY(-202%);
+        transform: translateY(-202%);
+    }
+
+    50% {
+        -webkit-transform: translateY(-200%);
+        transform: translateY(-200%);
+    }
+
+    60% {
+        -webkit-transform: translateY(-302%);
+        transform: translateY(-302%);
+    }
+
+    75% {
+        -webkit-transform: translateY(-300%);
+        transform: translateY(-300%);
+    }
+
+    85% {
+        -webkit-transform: translateY(-402%);
+        transform: translateY(-402%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-400%);
+        transform: translateY(-400%);
+    }
+}
+
+
+    .footer-container {
+        background: #2c3e50;
+        color: #ecf0f1;
+        padding: 30px 0;
+        font-family: 'Arial', sans-serif;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        position: relative;
+        left: 0;
+        right: 0;
+    }
+    
+    .footer-links a, .contact-info li, .social-links a {
+        display: flex;
+        align-items: center;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease;
+        
+    }
+    
+    .footer-links a:hover, .social-links a:hover {
+        color: #3498db;
+        transform: translateX(5px);
+    }
+    
+    .footer-links svg, .contact-info svg, .social-links svg {
+        min-width: 24px;
+        height: 24px;
+        stroke-width: 1.5;
+        transition: transform 0.2s ease, stroke 0.3s ease;
+    }
+    
+    .footer-links a:hover svg, .social-links a:hover svg {
+        transform: scale(1.1);
+        stroke: #3498db;
+    }
+    
+    .footer-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        justify-content: space-between;  /* Distribute space evenly */
+    flex-wrap: wrap;  /* Allow wrapping on smaller screens */
+    
+    }
+    
+    .footer-section {
+        flex: 1;  /* Allow sections to grow equally */
+    min-width: 250px; 
+        margin-bottom: 30px;
+    }
+    
+    .footer-section h2 {
+        color: #3498db;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .footer-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: #3498db;
+    }
+    
+    .footer-links, .contact-info, .social-links {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-links li, .contact-info li, .social-links li {
+        margin-bottom: 15px;
+    }
+    
+    .footer-links a, .contact-info a, .social-links a {
+        color: #ecf0f1;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover, .contact-info a:hover {
+        color: #3498db;
+    }
+    
+    .icon {
+        margin-right: 10px;
+        fill: currentColor;
+    }
+    
+    .copyright {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #34495e;
+    }
+    
+    .copyright a {
+        color: #3498db;
+        text-decoration: none;
+    }
+    
+    .copyright a:hover {
+        text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+        .footer-wrapper {
+            flex-direction: column;
+        align-items: center;
+        text-align: center;
+        }
+        
+        .footer-section {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .footer-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .footer-links a, .contact-info li, .social-links a {
+            justify-content: center;
+        }
+    }
+</style>
+    
+
+    <script>
+        // Simple form submission handling
+        document.getElementById('patientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const spinner = document.querySelector('.spinner');
+            spinner.style.display = 'block';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                alert('Patient registered successfully!');
+                this.reset();
+            }, 1500);
+        });
+    </script>
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Update the scroll effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.padding = '1rem 0';
+            navbar.style.background = 'rgba(255, 255, 255, 0.8)';
+            navbar.style.backdropFilter = 'blur(20px) saturate(200%)';
+        } else {
+            navbar.style.padding = '1.2rem 0';
+            navbar.style.background = 'rgba(255, 255, 255, 0.7)';
+            navbar.style.backdropFilter = 'blur(15px) saturate(180%)';
+        }
+    });
+</script>
+</body>
+</html>

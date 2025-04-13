@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Hospital Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Copy the existing CSS from index.html up to the hero section -->
+    <style>
+        /* Copy all the CSS from index.html navbar and general styles */
+        /* ... existing navbar and general styles ... */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --background-color: #f5f7fa;
+            --text-color: #2c3e50;
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6; 
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        /* Update the navbar styles in the existing <style> section */
+        /* Update the navbar styles */
+        .navbar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Update the scroll effect in the JavaScript */
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links li.active a {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links li.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Add responsive menu button */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+        
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1rem 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        }
+        /* Hero Section */
+        .hero {
+            margin : 5rem 0rem;
+            padding: 120px 0 4rem;
+            text-align: center;
+            background: #00d2ff;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            color: var(--white);
+            
+
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+           
+            margin: 20px auto;
+        }
+
+        /* Cards Section */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        /* Add new styles for services page */
+        .services-hero {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            padding: 100px 0 50px;
+            text-align: center;
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Add these styles inside your existing <style> tag */
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.1),
+                        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+                        0 0 30px rgba(52, 152, 219, 0.1),
+                        0 0 50px rgba(52, 152, 219, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+            transform: rotate(45deg);
+            animation: glowingEffect 3s infinite;
+            z-index: -1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(52, 152, 219, 0.2),
+                        0 0 0 2px rgba(52, 152, 219, 0.1) inset,
+                        0 0 40px rgba(52, 152, 219, 0.2),
+                        0 0 60px rgba(52, 152, 219, 0.1);
+        }
+        
+        .service-btn {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .service-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5, #00d2ff);
+            z-index: -1;
+            background-size: 200%;
+            animation: glowingBorder 3s linear infinite;
+            border-radius: 26px;
+        }
+        
+        @keyframes glowingEffect {
+            0% {
+                transform: rotate(0deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes glowingBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .location-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .location-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            animation: locationGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes locationGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .service-btn:hover {
+            transform: translateX(5px);
+        }
+
+        .location-section {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .location-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .location-info {
+            text-align: left;
+        }
+
+        .location-map {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .location-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* From Uiverse.io by JaydipPrajapati1910 */ 
+/* Update the loader styles */
+.loader {
+    position: relative;
+    transform: rotate(45deg);
+    width: 40px;  /* Added specific width */
+    height: 40px; /* Added specific height */
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+/* Update the heading style */
+.location-info h2 {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50% 50% 0 50%;
+  background: #0000;
+  background-image: radial-gradient(circle 11.2px at 50% 50%,#0000 94%, #ff4747);
+}
+
+.loader:after {
+  animation: pulse-ytk0dhmd 1s infinite;
+  transform: perspective(336px) translateZ(0px);
+}
+
+@keyframes pulse-ytk0dhmd {
+  to {
+    transform: perspective(336px) translateZ(168px);
+    opacity: 0;
+  }
+}
+  
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Copy the navbar from index.html -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo"><span style="font-size: 30px;">🏥</span> Hospital MedCorps 104</a>
+            <button class="menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="active"><a href="services.html">Services</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Our Medical Services</h1>
+            <p>Comprehensive healthcare solutions for you and your family</p>
+        </div>
+    </section>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">👨‍⚕️</div>
+            <h3 class="service-title">General Medicine</h3>
+            <p class="service-description">Comprehensive medical care for adults, including diagnosis and treatment of various health conditions.</p>
+            <a href="#" class="service-btn">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">👶</div>
+            <h3 class="service-title">Pediatrics</h3>
+            <p class="service-description">Specialized medical care for infants, children, and adolescents, ensuring healthy growth and development.</p>
+            <a href="#" class="service-btn">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">❤️</div>
+            <h3 class="service-title">Cardiology</h3>
+            <p class="service-description">Expert care for heart-related conditions, including diagnosis, treatment, and prevention.</p>
+            <a href="#" class="service-btn">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🦴</div>
+            <h3 class="service-title">Orthopedics</h3>
+            <p class="service-description">Specialized care for bones, joints, ligaments, tendons, muscles, and nerves.</p>
+            <a href="#" class="service-btn">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🚑</div>
+            <h3 class="service-title">Emergency Care</h3>
+            <p class="service-description">24/7 emergency medical services with rapid response and expert care for critical conditions.</p>
+            <a href="#" class="service-btn">Learn More</a>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">🔬</div>
+            <h3 class="service-title">Laboratory Services</h3>
+            <p class="service-description">Comprehensive diagnostic testing and laboratory services with quick and accurate results.</p>
+            <a href="#" class="service-btn">Learn More</a>
+        </div>
+    </div>
+
+    <section class="location-section">
+        <div class="location-container">
+            <div class="location-info">
+                <h2><div class="loader"></div>Find Us Here</h2>
+                <p>We are located within the campus of IIITDM Kancheepuram, providing accessible and quality healthcare for students, staff, and nearby residents.</p>
+                <div style="margin-top: 20px;">
+                    <p>📍 Indian Institute of Information Technology Design and Manufacturing, Melakottaiyur Village, Off Vandalur-Kelambakkam Road, Chennai - 600127, Tamil Nadu, India</p>
+                    <p>📞 +91 44 2747 6300</p>
+                    <p>🕒 Open 24/7 for Emergency Services</p>
+                </div>
+            </div>
+            
+<div class="location-map">
+    <div class="map-container">
+        <div class="map-overlay"></div>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.317644224375!2d80.13622731482249!3d12.837160090942702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f36a0843c27%3A0x9011a70fbc1b99c5!2sIndian%20Institute%20of%20Information%20Technology%2C%20Design%20and%20Manufacturing%2C%20Kancheepuram!5e0!3m2!1sen!2sin!4v1712928423109!5m2!1sen!2sin" 
+            width="100%" 
+            height="450" 
+            style="border-radius: 15px; border: 3px solid rgba(52, 152, 219, 0.2);" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+    <style>
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .map-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.3);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.1), transparent);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 15px;
+        }
+
+        .location-map iframe {
+            display: block;
+            filter: contrast(1.1) saturate(1.2);
+            transition: filter 0.3s ease;
+        }
+
+        .location-map iframe:hover {
+            filter: contrast(1.2) saturate(1.3);
+        }
+    </style>
+</div>
+        </div>
+    </section>
+
+    <!-- Copy the footer from index.html -->
+    <!-- ... footer code ... -->
+
+    <script>
+        // Copy the JavaScript from index.html for navbar functionality
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.padding = '1rem 0';
+                navbar.style.background = 'rgba(255, 255, 255, 0.8)';
+                navbar.style.backdropFilter = 'blur(20px) saturate(200%)';
+            } else {
+                navbar.style.padding = '1.2rem 0';
+                navbar.style.background = 'rgba(255, 255, 255, 0.7)';
+                navbar.style.backdropFilter = 'blur(15px) saturate(180%)';
+            }
+        });
+    </script>
+</body>
+</html>
